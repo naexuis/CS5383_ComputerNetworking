@@ -1,0 +1,86 @@
+syntax = "proto3";
+
+package CustomAppProto;
+import "replyMessage.proto";
+
+message Veggies {
+  float tomato = 1;
+  float cucumber = 2;
+  float carrots = 3;
+  float broccoli = 4;
+  float onions = 5;
+  float potatoes = 6;
+}
+
+enum MilkTypes {
+  MILK_TYPE_NOT_IN_USE = 0;
+  MILK_ONE_PERCENT = 1;
+  MILK_TWO_PERCENT = 2;
+  MILK_FAT_FREE = 3;
+  MILK_WHOLE = 4;
+  MILK_OAT = 5;
+  MILK_ALMOND = 6;
+  MILK_CASHEW = 7;
+}
+
+enum BreadTypes {
+  BREAD_TYPE_NOT_IN_USE = 0;
+  BREAD_WHOLE_WHEAT = 1;
+  BREAD_RYE = 2;
+  BREAD_PUMPERNICKEL = 3;
+}
+
+enum MeatTypes {
+  MEAT_TYPE_NOT_IN_USE = 0;
+  MEAT_PORK = 1;
+  MEAT_MUTTON = 2;
+  MEAT_CHICKEN = 3;
+  MEAT_STEAK = 4;
+}
+
+message Cans {
+  float coke = 1;
+  float pepsi = 2;
+  float beer = 3;
+}
+
+message Bottles {
+  float sprite = 1;
+  float wine = 2;
+  float gingerale = 3;
+}
+
+message Drinks {
+  Cans cans = 1;
+  Bottles bottles = 2;
+}
+
+message Milk {
+  MilkTypes type = 1;
+  float quantity = 2;
+}
+
+message Bread {
+  BreadTypes type = 1;
+  float quantity = 2;
+}
+
+message Meat {
+  MeatTypes type = 1;
+  float quantity = 2;
+}
+
+message Order {
+  uint32 seq_no = 1;     
+  double ts = 2;        
+  Veggies veggies = 3;
+  Drinks drinks = 4;
+  repeated Milk milk = 5;
+  repeated Bread bread = 6;
+  repeated Meat meat = 7;
+}
+
+service OrderService
+{
+    rpc method (Order) returns (ReplyMessage) {};
+}

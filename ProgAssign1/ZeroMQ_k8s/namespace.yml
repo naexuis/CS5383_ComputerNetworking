@@ -1,0 +1,17 @@
+#
+# This yaml file is used to create a namespace
+#
+# To create a namespace in K8s, run the following command (after your cluster is setup)
+#
+#     kubectl apply -f namespace.yml
+#
+# To check if your namespace is up, try
+#
+#    kubectl get namespaces
+# 
+# https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#dns-label-names
+apiVersion: v1
+kind: Namespace
+metadata:
+  # give some name. The names are already set for your teams on the Chameleon cloud
+  name: cluster1-ol-team2

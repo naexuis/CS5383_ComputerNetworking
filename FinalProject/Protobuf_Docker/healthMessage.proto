@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+package CustomAppProto;
+import "replyMessage.proto";
+
+enum Dispenser {
+  DISPENSER_NOT_IN_USE = 0;
+  DISPENSER_OPTIMAL = 1;
+  DISPENSER_PARTIAL = 2;
+  DISPENSER_BLOCKAGE = 3;
+}
+
+enum Lightbulb {
+  LIGHTBULB_NOT_IN_USE = 0;
+  LIGHTBULB_GOOD = 1;
+  LIGHTBULB_BAD = 2;
+}
+
+enum Sensor {
+  SENSOR_NOT_IN_USE = 0;
+  SENSOR_GOOD = 1;
+  SENSOR_BAD = 2;
+}
+
+message HealthMessage {
+  uint32 seq_no = 1;
+  double ts = 2;
+  string name = 3;
+  Dispenser dispenser = 4;
+  int32 icemaker = 5;
+  Lightbulb lightbulb = 6;
+  int32 fridge_temp = 7;
+  int32 freezer_temp = 8;
+  Sensor sensor_status = 9;
+}
+
+service HealthService
+{
+    rpc method (HealthMessage) returns (ReplyMessage) {};
+}

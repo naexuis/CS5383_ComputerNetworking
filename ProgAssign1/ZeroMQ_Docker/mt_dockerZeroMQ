@@ -1,0 +1,31 @@
+# Download base image ubuntu 22.04
+FROM ubuntu:22.04
+
+# LABEL about the custom image
+LABEL maintainer="marcus.hilliard@vanderbilt.edu"
+LABEL version="0.1"
+LABEL description="This is a custom Docker Image for ZeroMQ and Flatbuffers."
+
+# Disable Prompt During Packages Installation
+ARG DEBIAN_FRONTEND=noninteractive
+
+# Install the key packages
+RUN apt-get -y update && apt-get install -y cmake git gcc g++ clang default-jdk python3-dev python3-pip wget net-tools dnsutils iputils-ping iputils-tracepath iputils-arping iputils-clockdiff inetutils-traceroute emacs vim libzmq3-dev protobuf-compiler
+
+# Upgrade pip to the latest version
+RUN python3 -m pip install --upgrade pip
+
+# Install any python packages
+RUN python3 -m pip install --upgrade pyzmq grpcio grpcio-tools flatbuffers
+
+WORKDIR /work
+
+RUN git clone https://github.com/google/flatbuffers \
+	&& cd flatbuffers \
+	&& cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release \
+	&& make \ 
+	&& make install
+
+# Copy all of the files and directories from current directory 
+# to the current directory within the container
+COPY . .

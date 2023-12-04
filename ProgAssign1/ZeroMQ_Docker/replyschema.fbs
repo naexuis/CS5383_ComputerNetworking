@@ -1,0 +1,26 @@
+// We have to define a namespace under which this schema gets
+// translated to the programming language we are using.
+// Let us call it CustomAppProto
+
+namespace CustomAppProto;
+
+// define the user-defined type that we want to serialize
+// This can be arbitrarily complex. Here we show a sample
+// which is not overly complex but still showcases the features
+//
+// In your case this structure will be whatever is the data structure
+// that holds the information that the producer will send to consumer
+
+enum ReplyRequest:byte { GOOD = 0, BAD = 1 }
+
+enum ReplyStatus:byte { GOOD = 0, BAD = 1 }
+
+table ReplyMessage
+{
+   seq_no: uint32;   // this is like the seq num in a TCP segment
+   ts: double;       // say this is the timestamp
+   reply_request: ReplyRequest = GOOD; // Enum.
+   reply_status: ReplyStatus = GOOD; // Enum.
+}
+
+root_type ReplyMessage;

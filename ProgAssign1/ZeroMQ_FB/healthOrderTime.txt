@@ -1,0 +1,13 @@
+iterStep,process,time
+0,health serialization,0.00011682510375976562
+1,health deserialization,1.0075089931488037
+1,health serialization,0.0005033016204833984
+2,health deserialization,1.0086238384246826
+2,order serialization,0.001474618911743164
+3,ORDER deserialization,1.0103681087493896
+3,health serialization,0.0006008148193359375
+4,health deserialization,1.003891944885254
+4,health serialization,0.00045609474182128906
+5,health deserialization,1.008298397064209
+5,order serialization,0.0016956329345703125
+6,ORDER deserialization,1.0077369213104248

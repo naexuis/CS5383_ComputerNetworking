@@ -1,0 +1,149 @@
+// We have to define a namespace under which this schema gets
+// translated to the programming language we are using.
+// Let us call it CustomAppProto
+
+namespace CustomAppProto;
+
+// define the user-defined type that we want to serialize
+// This can be arbitrarily complex. Here we show a sample
+// which is not overly complex but still showcases the features
+//
+// In your case this structure will be whatever is the data structure
+// that holds the information that the producer will send to consumer
+
+enum VegType:byte { 
+                     TOMATO = 0, 
+                     CUCUMBER = 1, 
+                     POTATO = 2,
+                     CARROT = 3,
+                     SPINACH = 4,
+                     LETTUCE = 5,
+                     BROCCOLI = 6,
+                     CAULIFLOWER = 7,
+                     BOK_CHOY = 8,
+                     ONION = 9,
+                     GARLIC = 10,
+                     GREEN_BEANS = 11,
+                     PEAS = 12,
+                     }
+
+enum CanType:byte { 
+                     COCA_COLA = 0, 
+                     PEPSI = 1, 
+                     DIET_COKE = 2,
+                     DR_PEPPER = 3,
+                     MOUNTAIN_DEW = 4,
+                     SPRITE = 5,
+                     DEIT_PEPSI = 6,
+                     COKE_ZERO = 7,
+                     DIET_DR_PEPPER = 8,
+                     FANTA = 9,
+                     SIERRA_MIST = 10,
+                     SUNKIST = 11,
+                     TAB = 12,
+                     }
+
+
+enum BottleType:byte { 
+                     COCA_COLA = 0, 
+                     PEPSI = 1, 
+                     DIET_COKE = 2,
+                     DR_PEPPER = 3,
+                     MOUNTAIN_DEW = 4,
+                     SPRITE = 5,
+                     DEIT_PEPSI = 6,
+                     COKE_ZERO = 7,
+                     DIET_DR_PEPPER = 8,
+                     }
+
+enum MilkType:byte { 
+                     ONEPERCENT = 0, 
+                     TWOPERCENT = 1, 
+                     FATFREE = 2,
+                     WHOLE = 3,
+                     ALMOND = 4,
+                     CASHEW = 5,
+                     OAT = 6,
+                     }
+
+enum BreadType:byte { 
+                     AREPA = 0, 
+                     BAGUETTE = 1, 
+                     BAGEL = 2,
+                     BRIOCHE = 3,
+                     CIABATTA = 4,
+                     CHALLAH = 5,
+                     ENGLISH_MUFFIN = 6,
+                     FOCACCIA = 7,
+                     HOKKAIDO = 8,
+                     IRISH_SODA_BREAD = 9,
+                     MULTIGRAIN = 10,
+                     NAAN = 11,
+                     PARATHA = 12,
+                     PITA = 13,
+                     RYE_BREAD = 14,
+                     SOURDOUGH = 15,
+                     WHITE_BREAD = 16,
+                     WHOLE_WHEAT_BREAD = 17,
+                     }
+
+enum MeatType:byte { 
+                     PORK = 0, 
+                     CHICKEN = 1, 
+                     BEEF = 2,
+                     LAMB = 3,
+                     GOAT = 4,
+                     TURKEY = 5,
+                     DUCK = 6,
+                     BUFFALO = 7,
+                     GOOSE = 8,
+                     RABBIT = 9,
+                     }
+
+table Veg {
+   vtype: VegType = TOMATO;
+   vquantity: float;
+}
+
+
+table CanDrink {
+   ctype: CanType = COCA_COLA;
+   cquantity: float;
+}
+
+
+table BottleDrink {
+   btype: BottleType = COCA_COLA;
+   bquantity: float;
+}
+
+table Milk {
+   mtype: MilkType = ONEPERCENT;
+   quantity: float;
+}
+
+table Bread {
+   ytype: BreadType = AREPA;
+   yquantity: float;
+}
+
+table Meat {
+   xtype: MeatType = PORK;
+   xquantity: float;
+}
+
+table OrderMessage
+{
+   seq_no: uint32;   // this is like the seq num in a TCP segment
+   ts: double;       // say this is the timestamp
+   vl: [Veg];       // List
+   cl: [CanDrink];     // List
+   bl: [BottleDrink];     // List
+   ml: [Milk];     // List
+   yl: [Bread];     // List
+   xl: [Meat];     // List
+
+
+}
+
+root_type OrderMessage;

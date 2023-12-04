@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package CustomAppProto;
+
+// Define the user-defined type that we want to serialize
+// This can be arbitrarily complex. Here we show a sample
+// which is not overly complex but still showcases the features
+//
+// In your case, this structure will be whatever is the data structure
+// that holds the information that the producer will send to the consumer
+
+// Define enums for ReplyRequest and ReplyStatus
+enum ReplyRequest {
+  REPLY_REQUEST_NOT_SET = 0;
+  GOOD = 1;
+  BAD = 2;
+}
+
+enum ReplyStatus {
+  REPLY_STATUS_NOT_SET = 0;
+  SUCCESSFUL = 1;
+  UNSUCCESSFUL = 2;
+}
+
+// Define the ReplyMessage message type
+message ReplyMessage {
+  uint32 seq_no = 1;     // this is like the seq num in a TCP segment
+  double ts = 2;         // say this is the timestamp
+  ReplyRequest reply_request = 3; // Enum.
+  ReplyStatus reply_status = 4;   // Enum.
+}

@@ -1,0 +1,33 @@
+// We have to define a namespace under which this schema gets
+// translated to the programming language we are using.
+// Let us call it CustomAppProto
+
+namespace CustomAppProto;
+
+// define the user-defined type that we want to serialize
+// This can be arbitrarily complex. Here we show a sample
+// which is not overly complex but still showcases the features
+//
+// In your case this structure will be whatever is the data structure
+// that holds the information that the producer will send to consumer
+
+enum Dispenser:byte { OPTIMAL = 0, PARTIAL = 1, BLOCKAGE = 2 }
+
+enum Lightbulb:byte { GOOD = 0, BAD = 1 }
+
+enum Sensor:byte { GOOD = 0, BAD = 1 }
+
+table HealthMessage
+{
+   seq_no: uint32;   // this is like the seq num in a TCP segment
+   ts: double;       // say this is the timestamp
+   name: string;      // say this is some descriptive string
+   dispenser: Dispenser = OPTIMAL; // Enum.
+   icemaker: int32;  // integer for percentage efficiency
+   lightbulb: Lightbulb = GOOD; // Enum.
+   fridge_temp: int32; // fridge internal temperature
+   freezer_temp: int32; // freezer internal temperature
+   sensor_status: Sensor = GOOD; // Enum.
+}
+
+root_type HealthMessage;
